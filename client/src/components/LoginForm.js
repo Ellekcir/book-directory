@@ -2,7 +2,13 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 
-import { loginUser } from '../utils/API';
+// Using REST endpoints
+// import { loginUser } from '../utils/API';
+import { useMutation } from '@apollo/client'
+import { LOGIN_USER } from '../utils/mutations'
+
+// While converting --> GET requests will always be queries
+// Others --> Mutations
 import Auth from '../utils/auth';
 
 const LoginForm = () => {
@@ -10,6 +16,9 @@ const LoginForm = () => {
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
 
+  const [login] = useMutation(LOGIN_USER)
+
+  // const [addUser] = useMutation[ADD_USER]
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
@@ -26,7 +35,13 @@ const LoginForm = () => {
     }
 
     try {
-      const response = await loginUser(userFormData);
+      const response = await login({
+        variables: {
+          // email:'ri@gmail.com',
+          // password:'12345'
+          ...userFormData
+        }
+      });
 
       if (!response.ok) {
         throw new Error('something went wrong!');

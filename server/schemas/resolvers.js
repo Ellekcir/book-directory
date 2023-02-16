@@ -48,6 +48,7 @@ const resolvers = {
     // Adds a new book to the list of saved books for the current signed in user.
     saveBook: async (_, { newBook }, context) => {
       try {
+        // req.session.user_id = userID
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
           { $push: { savedBooks: newBook } },
