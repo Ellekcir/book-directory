@@ -1,7 +1,6 @@
 // see SignupForm.js for comments
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
-
 // Using REST endpoints
 // import { loginUser } from '../utils/API';
 import { useMutation } from '@apollo/client'

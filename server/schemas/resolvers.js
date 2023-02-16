@@ -12,7 +12,7 @@ const resolvers = {
         const userData = await User.findOne({ _id: context.user._id })
         // .select('-__v -password') is a Mongoose query method that specifies which fields of the retrieved document to exclude from the result. The minus sign before the __v field indicates that it should be excluded from the result.   
         // The password field is also being excluded from the result using the same method because the password field should not be returned to the client for security reasons
-        .select("-__v -password")
+        // .select("-__v -password")
           .populate("books");
 
         return userData;
